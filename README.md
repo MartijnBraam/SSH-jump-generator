@@ -76,3 +76,28 @@ Host brixit.example
 ```
 
 If you move your original ~/.ssh/config to ~/.ssh/config.pre it will be prepended to the generated config file.
+
+# Checking the keys
+
+The `check-keys.py` script tries to connect to all the hosts defined in your hostinfo.yml and interactivly asks you to
+upload the key on errors
+
+```
+$ ./check-keys.py
+Checking keys for jumphost brixit
+        Checking brixit...[OK]
+        Checking brixit.mail...[OK]
+        Checking brixit.data...[ERR]
+                Identity not installed on brixit.data
+                Do you want to upload identity ~/.ssh/brixit_rsa to brixit.data? [Y/n]
+        ... more checks and questions here
+
+--- CHECKING COMPLETED ---
+
+Host                 Status
+-------------------  --------------------
+brixit               OK
+brixit.mail          OK
+brixit.data          OK
+brixit.example       Error installing key
+```
